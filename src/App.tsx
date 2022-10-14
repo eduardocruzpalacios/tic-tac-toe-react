@@ -1,10 +1,8 @@
 import React from 'react';
-import './App.css';
 
-function App() {
+export const App: React.FC = () => {
+  const title = 'Tic tac toe';
   return (
-    <h1>Tic tac toe</h1>
+    <h1>{title}</h1>
   );
-}
-
-export default App;
+};
