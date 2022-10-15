@@ -1,7 +1,5 @@
-type TileValue = 'O' | 'X';
-
 export interface TileProps {
   key: number;
-  value?: TileValue;
+  value?: string;
   handleOnClick: () => void;
 }
