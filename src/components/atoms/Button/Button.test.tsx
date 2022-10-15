@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Tile } from './Tile';
+import { Button } from './Button';
 
-const key = 1;
-const value = 'O';
+const value = 'Reset';
 const handleClick = jest.fn();
 
-describe('<Tile />', () => {
+describe('<Button />', () => {
   beforeEach(() => {
     render(
-      <Tile
-        key={key}
+      <Button
         value={value}
         handleOnClick={handleClick}
       />
