@@ -3,12 +3,12 @@ import { TileProps } from './TileType';
 import { TileStyled } from './styled';
 
 export const Tile: React.FC<TileProps> = ({
-  key,
+  id,
   value,
   handleOnClick
 }: TileProps) => (
   <React.Fragment>
-    <TileStyled key={key} onClick={handleOnClick}>
+    <TileStyled id={id} onClick={handleOnClick}>
       {value && value}
     </TileStyled>
   </React.Fragment>

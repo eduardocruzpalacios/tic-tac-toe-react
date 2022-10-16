@@ -1,4 +1,6 @@
+import React from 'react';
+
 export interface BoardProps {
   tiles: string[];
-  handleClickTile: () => void;
+  handleClickTile: (event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
 }

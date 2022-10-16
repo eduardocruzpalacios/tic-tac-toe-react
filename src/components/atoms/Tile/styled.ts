@@ -1,9 +1,11 @@
 import Styled from 'styled-components';
 
-const size = 136;
+const size = 64;
 
 export const TileStyled = Styled.button`
-  border: 3px solid #000;
+  border: 2px solid #000;
+  margin-left: -2px;
+  margin-bottom: -2px;
   border-radius: 0;
   font-size: ${size / 2}px;
   height: ${size}px;

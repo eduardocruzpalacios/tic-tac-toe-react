@@ -1,5 +1,7 @@
+import React from 'react';
+
 export interface TileProps {
-  key: number;
+  id?: string;
   value?: string;
-  handleOnClick: () => void;
+  handleOnClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
 }
