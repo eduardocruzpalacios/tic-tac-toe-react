@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tile } from '~/components/atoms';
+import { Tile } from '../../../components/atoms';
 import { BoardProps } from './BoardType';
 import { BoardStyled } from './styled';
 
@@ -8,7 +8,7 @@ export const Board: React.FC<BoardProps> = ({ tiles, handleClickTile }: BoardPro
     return (
       <React.Fragment>
         <Tile
-          key={i}
+          id={i.toString()}
           value={tiles[i]}
           handleOnClick={handleClickTile}
         />

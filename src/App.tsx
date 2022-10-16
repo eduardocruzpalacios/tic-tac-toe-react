@@ -1,8 +1,8 @@
 import React from 'react';
+import { Game } from './components/organisms';
 
-export const App: React.FC = () => {
-  const title = 'Tic tac toe';
-  return (
-    <h1>{title}</h1>
-  );
-};
+export const App: React.FC = () => (
+  <React.Fragment>
+    <Game></Game>
+  </React.Fragment>
+);
