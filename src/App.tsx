@@ -1,8 +1,8 @@
 import React from 'react';
-import { Game } from './components/organisms';
+import { MainPage } from './components/pages';
 
 export const App: React.FC = () => (
   <React.Fragment>
-    <Game></Game>
+    <MainPage />
   </React.Fragment>
 );
