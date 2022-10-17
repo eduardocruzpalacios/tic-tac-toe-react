@@ -4,6 +4,7 @@ import { Title } from '../../../components/atoms';
 import { HeaderStyled, MainStyled } from './styled';
 import { useGlobalTheme } from '../../../common/ThemeContext';
 import './MainPage.css';
+import { Switch } from '../../atoms/Switch/Switch';
 
 export const MainPage: React.FC = () => {
   const title = 'Tic tac toe';
@@ -13,6 +14,7 @@ export const MainPage: React.FC = () => {
   return (
     <React.Fragment>
       <HeaderStyled className={theme}>
+        <Switch></Switch>
         <Title value={title}></Title>
       </HeaderStyled>
       <MainStyled className={theme}>

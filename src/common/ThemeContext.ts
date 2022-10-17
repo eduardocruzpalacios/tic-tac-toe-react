@@ -1,7 +1,9 @@
 import { createContext, useContext } from 'react';
 
 export enum THEME {
+  // eslint-disable-next-line no-unused-vars
   dark = 'dark',
+  // eslint-disable-next-line no-unused-vars
   light = 'light'
 }
 
@@ -10,8 +12,6 @@ type GlobalTheme = {
   setTheme?: (theme: THEME) => void;
 };
 
-const GlobalThemeContext = createContext<GlobalTheme>({
-  theme: THEME.dark
-});
+export const GlobalThemeContext = createContext<GlobalTheme>({});
 
 export const useGlobalTheme = (): GlobalTheme => useContext(GlobalThemeContext);
