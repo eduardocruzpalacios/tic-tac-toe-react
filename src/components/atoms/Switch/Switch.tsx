@@ -1,28 +1,19 @@
 import React from 'react';
+import { SwitchProps } from './SwitchType';
 
-import { useGlobalTheme, THEME } from '../../../common/ThemeContext';
-
-export const Switch: React.FC = () => {
-  const { setTheme, theme } = useGlobalTheme();
-
-  const changeTheme = () => {
-    if (setTheme) {
-      setTheme(
-        theme === THEME.light ? THEME.dark : THEME.light
-      );
-    }
-  };
-
-  return (
-    <React.Fragment>
-      <input
-        onChange={changeTheme}
-        id="themeSwitch"
-        type="checkbox"
-        name="themeSwitch" />
-      <label htmlFor="themeSwitch">
-        <span>Theme switch</span>
-      </label>
-    </React.Fragment>
-  );
-};
+export const Switch: React.FC<SwitchProps> = ({
+  value,
+  name,
+  handleOnChange
+}: SwitchProps) => (
+  <React.Fragment>
+    <input
+      onChange={handleOnChange}
+      id={name}
+      type="checkbox"
+      name={name} />
+    <label htmlFor={name}>
+      <span>{value}</span>
+    </label>
+  </React.Fragment>
+);
