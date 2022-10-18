@@ -3,7 +3,6 @@ import { Game } from '../../../components/organisms';
 import { Title, Switch } from '../../../components/atoms';
 import { HeaderStyled, MainStyled } from './styled';
 import { THEME, useGlobalTheme } from '../../../common/ThemeContext';
-import './MainPage.css';
 
 export const MainPage: React.FC = () => {
   const title = 'Tic tac toe';
