@@ -4,7 +4,7 @@ import { GlobalThemeContext, THEME } from './common/ThemeContext';
 import { UniversalStyle } from './AppStyled';
 
 export const App: React.FC = () => {
-  const [theme, setTheme] = useState<THEME>(THEME.dark);
+  const [theme, setTheme] = useState<THEME>(THEME.light);
   return (
     <React.Fragment>
       <GlobalThemeContext.Provider value={{ theme, setTheme }}>
