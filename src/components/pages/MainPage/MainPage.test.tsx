@@ -15,4 +15,9 @@ describe('MainPage />', () => {
     const titleEl = screen.getByText(title);
     expect(titleEl).toBeInTheDocument();
   });
+
+  it('has a checkbox element', () => {
+    const checkboxEl = screen.getByRole('checkbox');
+    expect(checkboxEl).toBeInTheDocument();
+  });
 });

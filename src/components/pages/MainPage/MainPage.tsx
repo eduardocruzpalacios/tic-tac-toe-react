@@ -7,7 +7,7 @@ import { THEME, useGlobalTheme } from '../../../common/ThemeContext';
 export const MainPage: React.FC = () => {
   const title = 'Tic tac toe';
 
-  const { setTheme, theme } = useGlobalTheme();
+  const { theme, setTheme } = useGlobalTheme();
 
   const changeTheme = () => {
     if (setTheme) {
