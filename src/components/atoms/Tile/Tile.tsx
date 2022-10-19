@@ -1,15 +1,20 @@
 import React from 'react';
 import { TileProps } from './TileType';
 import { TileStyled } from './styled';
+import { useGlobalTheme } from '../../../common/ThemeContext';
 
 export const Tile: React.FC<TileProps> = ({
   id,
   value,
   handleOnClick
-}: TileProps) => (
-  <React.Fragment>
-    <TileStyled id={id} onClick={handleOnClick}>
-      {value && value}
-    </TileStyled>
-  </React.Fragment>
-);
+}: TileProps) => {
+  const { theme } = useGlobalTheme();
+
+  return (
+    <React.Fragment>
+      <TileStyled id={id} onClick={handleOnClick} className={theme}>
+        {value && value}
+      </TileStyled>
+    </React.Fragment>
+  );
+};
