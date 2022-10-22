@@ -78,7 +78,9 @@ export const Game: React.FC = () => {
     return true;
   }
 
-  const [resultState, setResultState] = useState('Player 1 plays');
+  const resultInitialState = 'Player 1 plays';
+
+  const [resultState, setResultState] = useState(resultInitialState);
 
   function _tileIsFull(index: number) {
     return boardState[index] !== '';
@@ -101,7 +103,7 @@ export const Game: React.FC = () => {
       setResultState('It is a draw!');
     } else {
       setPlayer1IsPlaying(!player1IsPlaying);
-      setResultState(`Player ${player1IsPlaying ? 1 : 2} plays`);
+      setResultState(`Player ${!player1IsPlaying ? 1 : 2} plays`);
     }
   }
 
