@@ -17,13 +17,15 @@ export const DarkModeSwitch: React.FC = () => {
 
   return (
     <React.Fragment>
-      <InputStyled
-        onChange={changeTheme}
-        id={name}
-        type="checkbox"
-        name={name} />
-      <LabelStyled htmlFor={name} className={theme} >
-      </LabelStyled>
+      <div>
+        <InputStyled
+          onChange={changeTheme}
+          id={name}
+          type="checkbox"
+          name={name} />
+        <LabelStyled htmlFor={name} className={theme} >
+        </LabelStyled>
+      </div>
     </React.Fragment>
   );
 };

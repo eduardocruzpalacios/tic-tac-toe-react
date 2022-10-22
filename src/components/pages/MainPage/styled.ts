@@ -1,14 +1,13 @@
 import Styled from 'styled-components';
 
-const headerHeight = '80px';
+const headerHeight = '180px';
 
 export const HeaderStyled = Styled.header`
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  line-height: ${headerHeight};
-  min-height: ${headerHeight}x;
+  justify-content: space-evenly;
+  min-height: ${headerHeight};
 `;
 
 export const MainStyled = Styled.main`
