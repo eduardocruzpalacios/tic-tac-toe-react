@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, TextInfo } from '../../atoms';
 import { Board } from '../../molecules';
 import { SectionStyled } from './styled';
@@ -14,9 +14,38 @@ export const Game: React.FC = () => {
 
   const [player1IsPlaying, setPlayer1IsPlaying] = useState(true);
 
+  const [seconds, setSeconds] = useState(0);
+
+  const timerText = `Play time: ${seconds}`;
+
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  function resetTimer() {
+    setSeconds(0);
+    setIsTimerActive(true);
+  }
+
+  function stopTimer() {
+    setIsTimerActive(false);
+  }
+
+  useEffect(() => {
+    let interval: NodeJS.Timer | undefined;
+    if (isTimerActive) {
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+    }
+    if (!isTimerActive) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive, seconds]);
+
   function _handleResetButton() {
     setBoardState(initialBoardState);
     setPlayer1IsPlaying(true);
+    resetTimer();
   }
 
   function _getWInner(boardState: string[]) {
@@ -39,28 +68,17 @@ export const Game: React.FC = () => {
     return null;
   }
 
-  const winner = _getWInner(boardState);
-
   function _isBoardFull(boardState: string[]) {
     for (let i = 0; i < boardState.length; i++) {
       if (boardState[i] === '') {
         return false;
       }
     }
+    stopTimer();
     return true;
   }
 
-  function _getCurrentResult() {
-    let currentResult;
-    if (winner) {
-      currentResult = 'Winner: ' + winner;
-    } else if (_isBoardFull(boardState)) {
-      currentResult = 'It is a draw!';
-    } else {
-      currentResult = `Player ${player1IsPlaying ? 1 : 2} plays`;
-    }
-    return currentResult;
-  }
+  const [resultState, setResultState] = useState('Player 1 plays');
 
   function _tileIsFull(index: number) {
     return boardState[index] !== '';
@@ -69,21 +87,31 @@ export const Game: React.FC = () => {
   function _handleClickTile(event: React.UIEvent<HTMLButtonElement | HTMLDivElement>) {
     const clickedEl: ClickedElement = event.nativeEvent.composedPath()[0];
     const index = Number(clickedEl.id);
-    if (_tileIsFull(index) || winner) {
+    if (_tileIsFull(index) || _getWInner(boardState)) {
       return;
     }
     const nextBoardState = boardState.slice();
     nextBoardState[index] = player1IsPlaying ? 'O' : 'X';
     setBoardState(nextBoardState);
-    setPlayer1IsPlaying(!player1IsPlaying);
+    const winner = _getWInner(nextBoardState);
+    if (winner) {
+      stopTimer();
+      setResultState(`Winner: ${winner}`);
+    } else if (_isBoardFull(nextBoardState)) {
+      setResultState('It is a draw!');
+    } else {
+      setPlayer1IsPlaying(!player1IsPlaying);
+      setResultState(`Player ${player1IsPlaying ? 1 : 2} plays`);
+    }
   }
 
   return (
     <React.Fragment>
       <SectionStyled>
-        <TextInfo value={_getCurrentResult()}></TextInfo>
+        <TextInfo value={resultState}></TextInfo>
         <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
-        <Button value="Reset" handleOnClick={_handleResetButton}></Button>
+        <TextInfo value={timerText} />
+        <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>
   );
