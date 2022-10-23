@@ -1,7 +1,7 @@
 import React from 'react';
 import { Game } from '../../../components/organisms';
 import { Title, DarkModeSwitch } from '../../../components/atoms';
-import { HeaderStyled, MainStyled } from './styled';
+import { HeaderStyled, MainStyled, SwitchContainerStyled } from './styled';
 import { useGlobalTheme } from '../../../common/ThemeContext';
 
 export const MainPage: React.FC = () => {
@@ -12,7 +12,9 @@ export const MainPage: React.FC = () => {
   return (
     <React.Fragment>
       <HeaderStyled className={theme}>
-        <DarkModeSwitch />
+        <SwitchContainerStyled>
+          <DarkModeSwitch />
+        </SwitchContainerStyled>
         <Title value={title}></Title>
       </HeaderStyled>
       <MainStyled className={theme}>

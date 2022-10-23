@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Button, TextInfo } from '../../atoms';
 import { Board } from '../../molecules';
+import { movesCountReducer } from './moveCountReducer';
 import { SectionStyled } from './styled';
 
 interface ClickedElement extends EventTarget {
@@ -46,6 +47,7 @@ export const Game: React.FC = () => {
     setBoardState(initialBoardState);
     setPlayer1IsPlaying(true);
     resetTimer();
+    dispatch({ type: 'reset' });
   }
 
   function _getWInner(boardState: string[]) {
@@ -78,7 +80,9 @@ export const Game: React.FC = () => {
     return true;
   }
 
-  const [resultState, setResultState] = useState('Player 1 plays');
+  const resultInitialState = 'Player 1 plays';
+
+  const [resultState, setResultState] = useState(resultInitialState);
 
   function _tileIsFull(index: number) {
     return boardState[index] !== '';
@@ -90,6 +94,7 @@ export const Game: React.FC = () => {
     if (_tileIsFull(index) || _getWInner(boardState)) {
       return;
     }
+    dispatch({ type: 'increment' });
     const nextBoardState = boardState.slice();
     nextBoardState[index] = player1IsPlaying ? 'O' : 'X';
     setBoardState(nextBoardState);
@@ -101,9 +106,15 @@ export const Game: React.FC = () => {
       setResultState('It is a draw!');
     } else {
       setPlayer1IsPlaying(!player1IsPlaying);
-      setResultState(`Player ${player1IsPlaying ? 1 : 2} plays`);
+      setResultState(`Player ${!player1IsPlaying ? 1 : 2} plays`);
     }
   }
+
+  const movesCountInitialState = { count: 0 };
+
+  const [movesCountState, dispatch] = useReducer(movesCountReducer, movesCountInitialState);
+
+  const movesCountText = `Number of moves: ${movesCountState.count}`;
 
   return (
     <React.Fragment>
@@ -111,6 +122,7 @@ export const Game: React.FC = () => {
         <TextInfo value={resultState}></TextInfo>
         <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
         <TextInfo value={timerText} />
+        <TextInfo value={movesCountText} />
         <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>
