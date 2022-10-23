@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { Button, TextInfo } from '../../atoms';
 import { Board } from '../../molecules';
-import { movesCountReducer } from './moveCountReducer';
+import { movesCountReducer } from './movesCountReducer';
 import { SectionStyled } from './styled';
 
 interface ClickedElement extends EventTarget {
