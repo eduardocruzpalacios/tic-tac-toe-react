@@ -14,10 +14,6 @@
     "plugin:jest/recommended",
     "standard"
   ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -35,9 +31,6 @@
     "jest"
   ],
   "rules": {
-    "@typescript-eslint/no-use-before-define": [
-      "error"
-    ],
     "arrow-body-style": [
       "error",
       "as-needed"
@@ -57,6 +50,7 @@
         ]
       }
     ],
+    "no-undef": "off",
     "no-use-before-define": "off",
     "semi": [
       "error",

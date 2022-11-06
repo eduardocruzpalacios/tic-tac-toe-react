@@ -1,14 +1,19 @@
 import Styled from 'styled-components';
 
-const headerHeight = '80px';
+const headerHeight = '180px';
+
+const space = '30px';
+
+export const SwitchContainerStyled = Styled.div`
+  display: inline-block;
+  position: absolute;
+  right: ${space};
+  top: ${space};
+`;
 
 export const HeaderStyled = Styled.header`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  line-height: ${headerHeight};
-  min-height: ${headerHeight}x;
+  min-height: ${headerHeight};
+  padding-top: ${space};
 `;
 
 export const MainStyled = Styled.main`
