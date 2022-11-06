@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { Button, TextInfo } from '../../atoms';
+import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
+import { Button, TextInfo, TokenInput } from '../../atoms';
 import { Board } from '../../molecules';
 import { movesCountReducer } from './movesCountReducer';
 import { SectionStyled } from './styled';
@@ -20,6 +20,12 @@ export const Game: React.FC = () => {
   const timerText = `Play time: ${seconds}`;
 
   const [isTimerActive, setIsTimerActive] = useState(true);
+
+  const token1InitialState = 'X';
+  const [token1, setToken1] = useState(token1InitialState);
+
+  const token2InitialState = 'O';
+  const [token2, setToken2] = useState(token2InitialState);
 
   function resetTimer() {
     setSeconds(0);
@@ -46,6 +52,7 @@ export const Game: React.FC = () => {
   function _handleResetButton() {
     setBoardState(initialBoardState);
     setPlayer1IsPlaying(true);
+    setResultState(resultInitialState);
     resetTimer();
     dispatch({ type: 'reset' });
   }
@@ -80,7 +87,7 @@ export const Game: React.FC = () => {
     return true;
   }
 
-  const resultInitialState = 'Player 1 plays';
+  const resultInitialState = `Player ${token1} plays`;
 
   const [resultState, setResultState] = useState(resultInitialState);
 
@@ -96,7 +103,7 @@ export const Game: React.FC = () => {
     }
     dispatch({ type: 'increment' });
     const nextBoardState = boardState.slice();
-    nextBoardState[index] = player1IsPlaying ? 'O' : 'X';
+    nextBoardState[index] = player1IsPlaying ? token1 : token2;
     setBoardState(nextBoardState);
     const winner = _getWInner(nextBoardState);
     if (winner) {
@@ -106,7 +113,7 @@ export const Game: React.FC = () => {
       setResultState('It is a draw!');
     } else {
       setPlayer1IsPlaying(!player1IsPlaying);
-      setResultState(`Player ${!player1IsPlaying ? 1 : 2} plays`);
+      setResultState(`Player ${!player1IsPlaying ? token1 : token2} plays`);
     }
   }
 
@@ -116,10 +123,48 @@ export const Game: React.FC = () => {
 
   const movesCountText = `Number of moves: ${movesCountState.count}`;
 
+  function _changeToken1(event: ChangeEvent) {
+    const newToken = (event?.target as HTMLInputElement).value;
+    const winner = _getWInner(boardState);
+    if (newToken !== '' && !winner) {
+      const oldToken = token1;
+      _updateBoardWithNewToken(newToken, oldToken);
+      setToken1(newToken);
+      setResultState(`Player ${player1IsPlaying ? newToken : token2} plays`);
+    }
+  }
+
+  function _changeToken2(event: ChangeEvent) {
+    const newToken = (event?.target as HTMLInputElement).value;
+    const winner = _getWInner(boardState);
+    if (newToken !== '' && !winner) {
+      const oldToken = token2;
+      _updateBoardWithNewToken(newToken, oldToken);
+      setToken2(newToken);
+      setResultState(`Player ${player1IsPlaying ? token1 : newToken} plays`);
+    }
+  }
+
+  function _updateBoardWithNewToken(newToken: string, oldToken: string) {
+    const boardStateToUpdate = boardState.slice();
+    for (let i = 0; i < boardStateToUpdate.length; i++) {
+      if (boardStateToUpdate[i] === oldToken) {
+        boardStateToUpdate[i] = newToken;
+      }
+    }
+    setBoardState(boardStateToUpdate);
+  }
+
   return (
     <React.Fragment>
       <SectionStyled>
         <TextInfo value={resultState}></TextInfo>
+        <div>
+          <TokenInput name='Pj 1:' value={token1} action={(event: ChangeEvent) => _changeToken1(event)} length={1} />
+        </div>
+        <div>
+          <TokenInput name='Pj 2:' value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
+        </div>
         <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
         <TextInfo value={timerText} />
         <TextInfo value={movesCountText} />
