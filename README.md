@@ -1,6 +1,6 @@
 # Tic tac toe
 
-Tic tac toe build with React hooks, TypeScript, Node, CSS, Styled Components, Jest & Testing library.
+Tic tac toe built with React hooks, TypeScript, Node, CSS, Styled Components, Jest & Testing library.
 
 ## Functionality
 - Solo game
