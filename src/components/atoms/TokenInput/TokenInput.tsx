@@ -1,4 +1,6 @@
 import React from 'react';
+import { useGlobalTheme } from '../../../common/ThemeContext';
+import { InputStyled } from './styled';
 import { TokenInputProps } from './TokenInputType';
 
 export const TokenInput: React.FC<TokenInputProps> = ({
@@ -6,16 +8,19 @@ export const TokenInput: React.FC<TokenInputProps> = ({
   value,
   action,
   length
-}: TokenInputProps) => (
-  <React.Fragment>
-    <label htmlFor={name}>{name}</label>
-    <input
-      name={name}
-      type="text"
-      value={value}
-      className="input"
-      onChange={action}
-      maxLength={length}
-    />
-  </React.Fragment>
-);
+}: TokenInputProps) => {
+  const { theme } = useGlobalTheme();
+  return (
+    <React.Fragment>
+      <label htmlFor={name}>{name}</label>
+      <InputStyled
+        name={name}
+        type="text"
+        value={value}
+        onChange={action}
+        maxLength={length}
+        className={theme}
+      />
+    </React.Fragment>
+  );
+};
