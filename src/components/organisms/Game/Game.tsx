@@ -21,6 +21,9 @@ export const Game: React.FC = () => {
 
   const [isTimerActive, setIsTimerActive] = useState(true);
 
+  const token1 = 'X';
+  const token2 = 'O';
+
   function resetTimer() {
     setSeconds(0);
     setIsTimerActive(true);
@@ -46,6 +49,7 @@ export const Game: React.FC = () => {
   function _handleResetButton() {
     setBoardState(initialBoardState);
     setPlayer1IsPlaying(true);
+    setResultState(resultInitialState);
     resetTimer();
     dispatch({ type: 'reset' });
   }
@@ -80,7 +84,7 @@ export const Game: React.FC = () => {
     return true;
   }
 
-  const resultInitialState = 'Player 1 plays';
+  const resultInitialState = `Player ${token1} plays`;
 
   const [resultState, setResultState] = useState(resultInitialState);
 
@@ -96,7 +100,7 @@ export const Game: React.FC = () => {
     }
     dispatch({ type: 'increment' });
     const nextBoardState = boardState.slice();
-    nextBoardState[index] = player1IsPlaying ? 'O' : 'X';
+    nextBoardState[index] = player1IsPlaying ? token1 : token2;
     setBoardState(nextBoardState);
     const winner = _getWInner(nextBoardState);
     if (winner) {
@@ -106,7 +110,7 @@ export const Game: React.FC = () => {
       setResultState('It is a draw!');
     } else {
       setPlayer1IsPlaying(!player1IsPlaying);
-      setResultState(`Player ${!player1IsPlaying ? 1 : 2} plays`);
+      setResultState(`Player ${!player1IsPlaying ? token1 : token2} plays`);
     }
   }
 

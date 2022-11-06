@@ -1,5 +1,5 @@
 export interface TokenInputProps {
-  value: string;
+  value?: string;
   action: React.ChangeEventHandler<HTMLInputElement>;
   length: number;
 }
