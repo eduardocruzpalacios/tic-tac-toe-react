@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { Button, TextInfo } from '../../atoms';
+import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
+import { Button, TextInfo, TokenInput } from '../../atoms';
 import { Board } from '../../molecules';
 import { movesCountReducer } from './movesCountReducer';
 import { SectionStyled } from './styled';
@@ -21,8 +21,11 @@ export const Game: React.FC = () => {
 
   const [isTimerActive, setIsTimerActive] = useState(true);
 
-  const token1 = 'X';
-  const token2 = 'O';
+  const token1InitialState = 'X';
+  const [token1, setToken1] = useState(token1InitialState);
+
+  const token2InitialState = 'O';
+  const [token2, setToken2] = useState(token2InitialState);
 
   function resetTimer() {
     setSeconds(0);
@@ -120,10 +123,48 @@ export const Game: React.FC = () => {
 
   const movesCountText = `Number of moves: ${movesCountState.count}`;
 
+  function _changeToken1(event: ChangeEvent) {
+    const newToken = (event?.target as HTMLInputElement).value;
+    const winner = _getWInner(boardState);
+    if (newToken !== '' && !winner) {
+      const oldToken = token1;
+      _updateBoardWithNewToken(newToken, oldToken);
+      setToken1(newToken);
+      setResultState(`Player ${player1IsPlaying ? newToken : token2} plays`);
+    }
+  }
+
+  function _changeToken2(event: ChangeEvent) {
+    const newToken = (event?.target as HTMLInputElement).value;
+    const winner = _getWInner(boardState);
+    if (newToken !== '' && !winner) {
+      const oldToken = token2;
+      _updateBoardWithNewToken(newToken, oldToken);
+      setToken2(newToken);
+      setResultState(`Player ${player1IsPlaying ? token1 : newToken} plays`);
+    }
+  }
+
+  function _updateBoardWithNewToken(newToken: string, oldToken: string) {
+    const boardStateToUpdate = boardState.slice();
+    for (let i = 0; i < boardStateToUpdate.length; i++) {
+      if (boardStateToUpdate[i] === oldToken) {
+        boardStateToUpdate[i] = newToken;
+      }
+    }
+    setBoardState(boardStateToUpdate);
+  }
+
   return (
     <React.Fragment>
       <SectionStyled>
         <TextInfo value={resultState}></TextInfo>
+        <div>
+          <TokenInput value={token1} action={(event: ChangeEvent) => _changeToken1(event)} length={1} />
+        </div>
+        <div>
+          <TokenInput value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
+        </div>
         <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
         <TextInfo value={timerText} />
         <TextInfo value={movesCountText} />
