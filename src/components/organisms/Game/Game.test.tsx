@@ -65,4 +65,31 @@ describe('<Game />', () => {
     expect(tiles1Els).toHaveLength(3);
     expect(tiles2Els).toHaveLength(2);
   });
+
+  it('counts game time', () => {
+    const counterEl = screen.getByText(/Play time/i);
+    expect(counterEl).toHaveTextContent('0');
+    setTimeout(() => {
+      expect(counterEl).toHaveTextContent('3');
+    }, 3000);
+  });
+
+  it('allows change tokens of players', () => {
+    const buttonEls = screen.getAllByRole('button');
+    fireEvent.click(buttonEls[0]);
+    fireEvent.click(buttonEls[1]);
+    fireEvent.click(buttonEls[3]);
+    fireEvent.click(buttonEls[2]);
+    let tiles1Els = screen.getAllByText(/^x$/i);
+    let tiles2Els = screen.getAllByText(/^o$/i);
+    expect(tiles1Els).toHaveLength(2);
+    expect(tiles2Els).toHaveLength(2);
+    const pjTokens = screen.getAllByRole('textbox');
+    fireEvent.change(pjTokens[0], { target: { value: 'a' } });
+    fireEvent.change(pjTokens[1], { target: { value: 'b' } });
+    tiles1Els = screen.getAllByText(/^a$/i);
+    tiles2Els = screen.getAllByText(/^b$/i);
+    expect(tiles1Els).toHaveLength(2);
+    expect(tiles2Els).toHaveLength(2);
+  });
 });
