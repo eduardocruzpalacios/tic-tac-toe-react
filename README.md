@@ -15,7 +15,7 @@ Tic tac toe built with React hooks, TypeScript, Node, CSS, Styled Components, Je
 ## Testing
 - Test runner: Jest
 - Queries: Testing library
-- Coverage > 85%
+- Coverage > 95%
 
 ## Tooling
 - ESLint
