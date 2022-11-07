@@ -7,7 +7,7 @@ export enum THEME {
   light = 'light'
 }
 
-type GlobalTheme = {
+export type GlobalTheme = {
   theme?: THEME;
   setTheme?: (theme: THEME) => void;
 };
