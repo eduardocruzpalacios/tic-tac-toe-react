@@ -20,4 +20,3 @@ Tic tac toe built with React hooks, TypeScript, Node, CSS, Styled Components, Je
 ## Tooling
 - ESLint
 - Prettier
-- Husky
