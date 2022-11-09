@@ -1,5 +1,5 @@
 import React from 'react';
-import { Game } from '../../../components/organisms';
+import { SoloGame } from '../../organisms';
 import { Title, DarkModeSwitch } from '../../../components/atoms';
 import { HeaderStyled, MainStyled, SwitchContainerStyled } from './styled';
 import { useGlobalTheme } from '../../../common/ThemeContext';
@@ -18,7 +18,7 @@ export const MainPage: React.FC = () => {
         <Title value={title}></Title>
       </HeaderStyled>
       <MainStyled className={theme}>
-        <Game />
+        <SoloGame />
       </MainStyled>
     </React.Fragment>
   );

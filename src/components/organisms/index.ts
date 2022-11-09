@@ -1,5 +1,5 @@
-import { Game } from './Game/Game';
+import { SoloGame } from './SoloGame/SoloGame';
 
 export {
-  Game
+  SoloGame
 };

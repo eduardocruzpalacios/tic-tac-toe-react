@@ -8,7 +8,7 @@ interface ClickedElement extends EventTarget {
   id?: string;
 }
 
-export const Game: React.FC = () => {
+export const SoloGame: React.FC = () => {
   const initialBoardState = new Array(9).fill('');
 
   const [boardState, setBoardState] = useState(initialBoardState);

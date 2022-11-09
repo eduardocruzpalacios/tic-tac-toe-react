@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Game } from './Game';
+import { SoloGame } from './SoloGame';
 
-describe('<Game />', () => {
+describe('<SoloGame />', () => {
   beforeEach(() => {
     render(
-      <Game />
+      <SoloGame />
     );
   });
 
