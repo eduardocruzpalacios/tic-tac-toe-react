@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MainPage } from './components/pages';
+import { HomePage } from './components/pages';
 import { GlobalThemeContext, THEME } from './common/ThemeContext';
 import { UniversalStyle } from './AppStyled';
 
@@ -9,7 +9,7 @@ export const App: React.FC = () => {
     <React.Fragment>
       <GlobalThemeContext.Provider value={{ theme, setTheme }}>
         <UniversalStyle />
-        <MainPage />
+        <HomePage />
       </GlobalThemeContext.Provider>
     </React.Fragment >
   );

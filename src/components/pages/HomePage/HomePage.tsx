@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Nav, SoloGame } from '../../organisms';
 import { Routes, Route } from 'react-router-dom';
 
-export const MainPage: React.FC = () => (
+export const HomePage: React.FC = () => (
   <React.Fragment>
     <Header />
     <Routes>
