@@ -1,4 +1,5 @@
 import Styled from 'styled-components';
+import { blackColor, whiteColor } from '../../../common/styleUtils';
 
 export const InputTextStyled = Styled.input`
   border: none;
@@ -9,11 +10,11 @@ export const InputTextStyled = Styled.input`
   text-align: center;
   width: 40px;
   &.dark {
-    background-color: #ddd;
-    color: #222;
+    background-color: ${whiteColor};
+    color: ${blackColor};
   }
   &.light {
-    background-color: #222;
-    color: #ddd;
+    background-color: ${blackColor};
+    color: ${whiteColor};
   }
 `;

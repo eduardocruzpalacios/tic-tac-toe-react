@@ -1,17 +1,16 @@
 import Styled from 'styled-components';
-
-const headerHeight = '180px';
-
-const space = '30px';
+import { space120, space30 } from '../../../common/styleUtils';
 
 export const SwitchContainerStyled = Styled.div`
   display: inline-block;
   position: absolute;
-  right: ${space};
-  top: ${space};
+  right: ${space30};
+  top: ${space30};
 `;
 
 export const HeaderStyled = Styled.header`
-  min-height: ${headerHeight};
-  padding-top: ${space};
+align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: ${space120};
 `;

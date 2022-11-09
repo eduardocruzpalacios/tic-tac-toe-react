@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { blackColor, whiteColor } from './common/styleUtils';
 
 export const UniversalStyle = createGlobalStyle`
   * {
@@ -7,11 +8,11 @@ export const UniversalStyle = createGlobalStyle`
     padding: 0;
   }
   &.dark {
-    background-color: #222;
-    color: #ddd;
+    background-color: ${blackColor};
+    color: ${whiteColor};
   }
   &.light {
-    background-color: #ddd;
-    color: #222;
+    background-color: ${whiteColor};
+    color: ${blackColor};
   }
 `;
