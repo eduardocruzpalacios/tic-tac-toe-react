@@ -1,12 +1,5 @@
 import Styled from 'styled-components';
-import { blackColor, space120, space30, space60, whiteColor } from '../../../common/styleUtils';
-
-export const MainStyled = Styled.main`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  min-height: calc(100vh - ${space120} - ${space60});
-`;
+import { blackColor, space30, space60, whiteColor } from '../../../common/styleUtils';
 
 export const NavStyled = Styled.nav`
   & ul {

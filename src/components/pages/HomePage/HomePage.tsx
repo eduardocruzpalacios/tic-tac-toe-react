@@ -1,15 +1,19 @@
 import React from 'react';
-import { Header, Nav, SoloGame } from '../../organisms';
-import { Routes, Route } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { useGlobalTheme } from '../../../common/ThemeContext';
+import { Header, Nav } from '../../organisms';
+import { MainStyled } from './styled';
 
-export const HomePage: React.FC = () => (
-  <React.Fragment>
-    <Header />
-    <Routes>
-      <Route path="/" element={<Nav />}>
-        <Route index element={<SoloGame />} />
-        <Route path="*" element={<SoloGame />} />
-      </Route>
-    </Routes>
-  </React.Fragment >
-);
+export const HomePage: React.FC = () => {
+  const { theme } = useGlobalTheme();
+
+  return (
+    <React.Fragment>
+      <Header />
+      <Nav />
+      <MainStyled className={theme}>
+        <Outlet />
+      </MainStyled>
+    </React.Fragment >
+  );
+};
