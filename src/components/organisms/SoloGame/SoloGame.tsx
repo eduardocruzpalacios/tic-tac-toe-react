@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
-import { Button, TextInfo, InputText } from '../../atoms';
+import { Button, Span, InputText } from '../../atoms';
 import { Board } from '../../molecules';
 import { movesCountReducer } from './movesCountReducer';
 import { SectionStyled } from './styled';
@@ -158,7 +158,7 @@ export const SoloGame: React.FC = () => {
   return (
     <React.Fragment>
       <SectionStyled>
-        <TextInfo value={resultState}></TextInfo>
+        <Span value={resultState} />
         <div>
           <InputText name='Pj 1:' value={token1} action={(event: ChangeEvent) => _changeToken1(event)} length={1} />
         </div>
@@ -166,8 +166,8 @@ export const SoloGame: React.FC = () => {
           <InputText name='Pj 2:' value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
         </div>
         <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
-        <TextInfo value={timerText} />
-        <TextInfo value={movesCountText} />
+        <Span value={timerText} />
+        <Span value={movesCountText} />
         <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>

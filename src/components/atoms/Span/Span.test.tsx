@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { TextInfo } from './TextInfo';
+import { Span } from './Span';
 
 const value = 'You won';
 
-describe('<TextInfo />', () => {
+describe('<Span />', () => {
   beforeEach(() => {
     render(
-      <TextInfo
+      <Span
         value={value}
       />
     );
