@@ -1,13 +1,13 @@
 import { Button } from './Button/Button';
+import { InputText } from './InputText/InputText';
 import { TextInfo } from './TextInfo/TextInfo';
 import { Tile } from './Tile/Tile';
 import { Title } from './Title/Title';
-import { TokenInput } from './TokenInput/TokenInput';
 
 export {
   Button,
+  InputText,
   TextInfo,
   Tile,
-  Title,
-  TokenInput
+  Title
 };

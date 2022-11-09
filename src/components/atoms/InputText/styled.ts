@@ -1,6 +1,6 @@
 import Styled from 'styled-components';
 
-export const InputStyled = Styled.input`
+export const InputTextStyled = Styled.input`
   border: none;
   font-weight: bold;
   margin-left: 10px;
