@@ -1,5 +1,6 @@
 import React from 'react';
-import { Title, DarkModeSwitch } from '../../../components/atoms';
+import { Title } from '../../../components/atoms';
+import { DarkModeSwitch } from '../../../components/molecules';
 import { HeaderStyled, SwitchContainerStyled } from './styled';
 import { useGlobalTheme } from '../../../common/ThemeContext';
 
