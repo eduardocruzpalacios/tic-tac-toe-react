@@ -8,10 +8,13 @@ export const Nav: React.FC = () => {
 
   return (
     <React.Fragment>
-      <NavStyled>
+      <NavStyled className={theme}>
         <ul>
           <li>
-            <Link to="/">Solo Game</Link>
+            <Link to="/">Solo</Link>
+          </li>
+          <li>
+            <Link to="/vsmachine">VS Machine</Link>
           </li>
         </ul>
       </NavStyled>

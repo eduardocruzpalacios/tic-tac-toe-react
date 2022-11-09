@@ -9,7 +9,6 @@ export const MainStyled = Styled.main`
 `;
 
 export const NavStyled = Styled.nav`
-  background-color: ${blackColor};
   & ul {
     display: flex;
     height: ${space60};
@@ -20,7 +19,6 @@ export const NavStyled = Styled.nav`
       height: inherit;
       & a {
         align-items: center;
-        color: ${whiteColor};
         display: flex;
         font-weight: bold;
         height: inherit;
@@ -29,10 +27,26 @@ export const NavStyled = Styled.nav`
         text-decoration: none;
         transition: 0.5s ease-in-out;
       }
-      & a:hover {
-        background-color: ${whiteColor};
-        color: ${blackColor};
-      }
     }  
+  }
+  &.light {
+    background-color: ${blackColor};
+    & a {
+      color: ${whiteColor};
+    }
+    & a:hover {
+      background-color: ${whiteColor};
+      color: ${blackColor};
+    }
+  }
+  &.dark {
+    background-color: ${whiteColor};
+    & a {
+      color: ${blackColor};
+    }
+    & a:hover {
+      background-color: ${blackColor};
+      color: ${whiteColor};
+      }  
   }
 `;
