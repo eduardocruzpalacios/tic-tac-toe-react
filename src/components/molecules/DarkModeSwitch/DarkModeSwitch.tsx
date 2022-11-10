@@ -1,5 +1,5 @@
 import React from 'react';
-import { THEME, useGlobalTheme } from '../../../common/ThemeContext';
+import { THEME, useGlobalTheme } from '../../../context/ThemeContext';
 import { InputStyled, LabelStyled } from './styled';
 
 export const DarkModeSwitch: React.FC = () => {

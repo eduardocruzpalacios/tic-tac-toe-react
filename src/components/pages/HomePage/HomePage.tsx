@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useGlobalTheme } from '../../../common/ThemeContext';
+import { useGlobalTheme } from '../../../context/ThemeContext';
 import { Header, Nav } from '../../organisms';
 import { MainStyled } from './styled';
 

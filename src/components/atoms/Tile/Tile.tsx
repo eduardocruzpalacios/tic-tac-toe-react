@@ -1,7 +1,7 @@
 import React from 'react';
 import { TileProps } from './TileType';
 import { TileStyled } from './styled';
-import { useGlobalTheme } from '../../../common/ThemeContext';
+import { useGlobalTheme } from '../../../context/ThemeContext';
 
 export const Tile: React.FC<TileProps> = ({
   id,

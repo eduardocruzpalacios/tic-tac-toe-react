@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGlobalTheme } from '../../../common/ThemeContext';
+import { useGlobalTheme } from '../../../context/ThemeContext';
 import { InputTextStyled } from './styled';
 import { InputTextProps } from './InputTextType';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useGlobalTheme } from '../../../common/ThemeContext';
+import { useGlobalTheme } from '../../../context/ThemeContext';
 import { NavStyled } from './styled';
 
 export const Nav: React.FC = () => {
@@ -12,6 +12,9 @@ export const Nav: React.FC = () => {
         <ul>
           <li>
             <Link to="/">Solo</Link>
+          </li>
+          <li>
+            <Link to="/oneversuscomputer">1 vs Computer</Link>
           </li>
         </ul>
       </NavStyled>
