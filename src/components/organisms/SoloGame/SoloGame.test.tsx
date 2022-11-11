@@ -1,18 +1,27 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Game } from './Game';
+import { SoloGame } from './SoloGame';
 
-describe('<Game />', () => {
+function getTilesEls() {
+  return screen.getAllByRole('button').filter(e => e.textContent === '');
+}
+
+describe('<SoloGame />', () => {
   beforeEach(() => {
     render(
-      <Game />
+      <SoloGame />
     );
   });
 
+  it('renders same number of buttons as array prop length', () => {
+    const tileEls = getTilesEls();
+    expect(tileEls).toHaveLength(9);
+  });
+
   it('resets state when reset button is clicked', () => {
-    const buttonEls = screen.getAllByRole('button');
+    const tileEls = getTilesEls();
     for (let i = 0; i < 4; i++) {
-      fireEvent.click(buttonEls[i]);
+      fireEvent.click(tileEls[i]);
     }
     let tiles1Els = screen.getAllByText(/^x$/i);
     let tiles2Els = screen.getAllByText(/^o$/i);
@@ -27,21 +36,21 @@ describe('<Game />', () => {
   });
 
   it('avoids updating board in case of draw', () => {
-    const buttonEls = screen.getAllByRole('button');
-    fireEvent.click(buttonEls[2]);
-    fireEvent.click(buttonEls[0]);
-    fireEvent.click(buttonEls[3]);
-    fireEvent.click(buttonEls[1]);
-    fireEvent.click(buttonEls[4]);
-    fireEvent.click(buttonEls[5]);
-    fireEvent.click(buttonEls[7]);
-    fireEvent.click(buttonEls[6]);
-    fireEvent.click(buttonEls[8]);
+    const tileEls = getTilesEls();
+    fireEvent.click(tileEls[2]);
+    fireEvent.click(tileEls[0]);
+    fireEvent.click(tileEls[3]);
+    fireEvent.click(tileEls[1]);
+    fireEvent.click(tileEls[4]);
+    fireEvent.click(tileEls[5]);
+    fireEvent.click(tileEls[7]);
+    fireEvent.click(tileEls[6]);
+    fireEvent.click(tileEls[8]);
     let tiles1Els = screen.getAllByText(/^x$/i);
     let tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(5);
     expect(tiles2Els).toHaveLength(4);
-    fireEvent.click(buttonEls[0]);
+    fireEvent.click(tileEls[0]);
     tiles1Els = screen.getAllByText(/^x$/i);
     tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(5);
@@ -49,17 +58,17 @@ describe('<Game />', () => {
   });
 
   it('avoids updating board in case of winning', () => {
-    const buttonEls = screen.getAllByRole('button');
-    fireEvent.click(buttonEls[0]);
-    fireEvent.click(buttonEls[1]);
-    fireEvent.click(buttonEls[3]);
-    fireEvent.click(buttonEls[2]);
-    fireEvent.click(buttonEls[6]);
+    const tileEls = getTilesEls();
+    fireEvent.click(tileEls[0]);
+    fireEvent.click(tileEls[1]);
+    fireEvent.click(tileEls[3]);
+    fireEvent.click(tileEls[2]);
+    fireEvent.click(tileEls[6]);
     let tiles1Els = screen.getAllByText(/^x$/i);
     let tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(3);
     expect(tiles2Els).toHaveLength(2);
-    fireEvent.click(buttonEls[4]);
+    fireEvent.click(tileEls[4]);
     tiles1Els = screen.getAllByText(/^x$/i);
     tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(3);
@@ -75,11 +84,11 @@ describe('<Game />', () => {
   });
 
   it('allows change tokens of players', () => {
-    const buttonEls = screen.getAllByRole('button');
-    fireEvent.click(buttonEls[0]);
-    fireEvent.click(buttonEls[1]);
-    fireEvent.click(buttonEls[3]);
-    fireEvent.click(buttonEls[2]);
+    const tileEls = getTilesEls();
+    fireEvent.click(tileEls[0]);
+    fireEvent.click(tileEls[1]);
+    fireEvent.click(tileEls[3]);
+    fireEvent.click(tileEls[2]);
     let tiles1Els = screen.getAllByText(/^x$/i);
     let tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(2);

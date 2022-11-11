@@ -1,5 +1,5 @@
 import Styled from 'styled-components';
 
-export const TextInfoStyled = Styled.span`
+export const SpanStyled = Styled.span`
   font-weight: bold;
 `;

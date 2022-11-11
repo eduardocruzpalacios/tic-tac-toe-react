@@ -1,15 +1,13 @@
 import { Button } from './Button/Button';
-import { DarkModeSwitch } from './DarkModeSwitch/DarkModeSwitch';
-import { TextInfo } from './TextInfo/TextInfo';
+import { InputText } from './InputText/InputText';
+import { Span } from './Span/Span';
 import { Tile } from './Tile/Tile';
 import { Title } from './Title/Title';
-import { TokenInput } from './TokenInput/TokenInput';
 
 export {
   Button,
-  DarkModeSwitch,
-  TextInfo,
+  InputText,
+  Span,
   Tile,
-  Title,
-  TokenInput
+  Title
 };

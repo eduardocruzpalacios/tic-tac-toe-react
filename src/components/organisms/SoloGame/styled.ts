@@ -7,3 +7,11 @@ export const SectionStyled = Styled.section`
   row-gap: 40px;
   width: auto;
 `;
+
+export const BoardStyled = Styled.div`
+  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+  width: auto;
+`;
