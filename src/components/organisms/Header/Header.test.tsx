@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MainPage } from './MainPage';
+import { Header } from './Header';
 
 const title = 'Tic tac toe';
 
-describe('MainPage />', () => {
+describe('Header />', () => {
   beforeEach(() => {
     render(
-      <MainPage />
+      <Header />
     );
   });
 

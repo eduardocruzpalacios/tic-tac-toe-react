@@ -1,5 +1,5 @@
 import React from 'react';
-import { THEME, useGlobalTheme } from '../../../common/ThemeContext';
+import { THEME, useGlobalTheme } from '../../../context/ThemeContext';
 import { InputStyled, LabelStyled } from './styled';
 
 export const DarkModeSwitch: React.FC = () => {
@@ -9,9 +9,7 @@ export const DarkModeSwitch: React.FC = () => {
 
   const changeTheme = () => {
     if (setTheme) {
-      setTheme(
-        theme === THEME.light ? THEME.dark : THEME.light
-      );
+      setTheme(theme === THEME.light ? THEME.dark : THEME.light);
     }
   };
 
@@ -21,9 +19,14 @@ export const DarkModeSwitch: React.FC = () => {
         onChange={changeTheme}
         id={name}
         type="checkbox"
-        name={name} />
-      <LabelStyled htmlFor={name} className={theme} >
-      </LabelStyled>
+        name={name}
+        data-testid="checkbox"
+      />
+      <LabelStyled
+        htmlFor={name}
+        className={theme}
+        data-testid="label"
+      ></LabelStyled>
     </React.Fragment>
   );
 };

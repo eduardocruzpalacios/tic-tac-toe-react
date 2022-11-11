@@ -1,19 +1,19 @@
 import React from 'react';
-import { useGlobalTheme } from '../../../common/ThemeContext';
-import { InputStyled } from './styled';
-import { TokenInputProps } from './TokenInputType';
+import { useGlobalTheme } from '../../../context/ThemeContext';
+import { InputTextStyled } from './styled';
+import { InputTextProps } from './InputTextType';
 
-export const TokenInput: React.FC<TokenInputProps> = ({
+export const InputText: React.FC<InputTextProps> = ({
   name,
   value,
   action,
   length
-}: TokenInputProps) => {
+}: InputTextProps) => {
   const { theme } = useGlobalTheme();
   return (
     <React.Fragment>
       <label htmlFor={name}>{name}</label>
-      <InputStyled
+      <InputTextStyled
         name={name}
         type="text"
         value={value}

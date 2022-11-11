@@ -1,5 +1,11 @@
-import { Game } from './Game/Game';
+import { Header } from './Header/Header';
+import { Nav } from './Nav/Nav';
+import { OneVersusComputerGame } from './OneVersusComputerGame/OneVersusComputerGame';
+import { SoloGame } from './SoloGame/SoloGame';
 
 export {
-  Game
+  Header,
+  Nav,
+  OneVersusComputerGame,
+  SoloGame
 };

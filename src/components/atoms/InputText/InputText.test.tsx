@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TokenInput } from './TokenInput';
+import { InputText } from './InputText';
 
 const name = 'name';
 const value = 'X';
 const action = jest.fn();
 const length = 1;
 
-describe('<TokenInput />', () => {
+describe('<InputText />', () => {
   beforeEach(() => {
     render(
-      <TokenInput
+      <InputText
         name={name}
         value={value}
         action={action}

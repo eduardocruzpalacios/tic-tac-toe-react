@@ -1,4 +1,5 @@
 import Styled from 'styled-components';
+import { whiteColor, blackColor } from '../../../common/styleUtils';
 
 export const LabelStyled = Styled.label`
   border-radius: 50%;
@@ -9,10 +10,10 @@ export const LabelStyled = Styled.label`
   transition: background-color 0.3s linear;
   width: 50px;
   &.dark {
-    background-color: #ddd;
+    background-color: ${whiteColor};
   }
   &.light {
-    background-color: #222;
+    background-color: ${blackColor};
   }
 `;
 

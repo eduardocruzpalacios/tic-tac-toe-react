@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { MainPage } from './components/pages';
-import { GlobalThemeContext, THEME } from './common/ThemeContext';
+import { HomePage } from './components/pages';
+import { GlobalThemeContext, THEME } from './context/ThemeContext';
 import { UniversalStyle } from './AppStyled';
+import { Routes, Route } from 'react-router-dom';
+import { OneVersusComputerGame, SoloGame } from './components/organisms';
 
 export const App: React.FC = () => {
   const [theme, setTheme] = useState<THEME>(THEME.light);
@@ -9,7 +11,13 @@ export const App: React.FC = () => {
     <React.Fragment>
       <GlobalThemeContext.Provider value={{ theme, setTheme }}>
         <UniversalStyle />
-        <MainPage />
+        <Routes>
+          <Route path="/" element={<HomePage />}>
+            <Route index element={<SoloGame />} />
+            <Route path="/oneversuscomputer" element={<OneVersusComputerGame />} />
+            <Route path="*" element={<SoloGame />} />
+          </Route>
+        </Routes>
       </GlobalThemeContext.Provider>
     </React.Fragment >
   );

@@ -1,14 +1,9 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
-import { Button, TextInfo, TokenInput } from '../../atoms';
-import { Board } from '../../molecules';
+import { Button, Span, InputText, Tile } from '../../atoms';
 import { movesCountReducer } from './movesCountReducer';
-import { SectionStyled } from './styled';
+import { BoardStyled, SectionStyled } from './styled';
 
-interface ClickedElement extends EventTarget {
-  id?: string;
-}
-
-export const Game: React.FC = () => {
+export const SoloGame: React.FC = () => {
   const initialBoardState = new Array(9).fill('');
 
   const [boardState, setBoardState] = useState(initialBoardState);
@@ -95,9 +90,7 @@ export const Game: React.FC = () => {
     return boardState[index] !== '';
   }
 
-  function _handleClickTile(event: React.UIEvent<HTMLButtonElement | HTMLDivElement>) {
-    const clickedEl: ClickedElement = event.nativeEvent.composedPath()[0];
-    const index = Number(clickedEl.id);
+  function _handleClickTile(index: number) {
     if (_tileIsFull(index) || _getWInner(boardState)) {
       return;
     }
@@ -158,18 +151,35 @@ export const Game: React.FC = () => {
   return (
     <React.Fragment>
       <SectionStyled>
-        <TextInfo value={resultState}></TextInfo>
+        <Span value={resultState} />
         <div>
-          <TokenInput name='Pj 1:' value={token1} action={(event: ChangeEvent) => _changeToken1(event)} length={1} />
+          <InputText name='Pj 1:' value={token1} action={(event: ChangeEvent) => _changeToken1(event)} length={1} />
         </div>
         <div>
-          <TokenInput name='Pj 2:' value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
+          <InputText name='Pj 2:' value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
         </div>
-        <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
-        <TextInfo value={timerText} />
-        <TextInfo value={movesCountText} />
+        <BoardStyled>
+          {_renderBoard(boardState)}
+        </BoardStyled>
+        <Span value={timerText} />
+        <Span value={movesCountText} />
         <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>
   );
+
+  function _renderBoard(boardState: string[]) {
+    return (
+      <React.Fragment>
+        {boardState.map((element, index) => (
+          <Tile
+            id={index.toString()}
+            value={element}
+            handleOnClick={() => _handleClickTile(index)}
+            key={index}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
 };
