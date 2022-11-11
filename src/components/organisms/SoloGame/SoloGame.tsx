@@ -1,12 +1,7 @@
 import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
-import { Button, Span, InputText } from '../../atoms';
-import { Board } from '../../molecules';
+import { Button, Span, InputText, Tile } from '../../atoms';
 import { movesCountReducer } from './movesCountReducer';
-import { SectionStyled } from './styled';
-
-interface ClickedElement extends EventTarget {
-  id?: string;
-}
+import { BoardStyled, SectionStyled } from './styled';
 
 export const SoloGame: React.FC = () => {
   const initialBoardState = new Array(9).fill('');
@@ -95,9 +90,7 @@ export const SoloGame: React.FC = () => {
     return boardState[index] !== '';
   }
 
-  function _handleClickTile(event: React.UIEvent<HTMLButtonElement | HTMLDivElement>) {
-    const clickedEl: ClickedElement = event.nativeEvent.composedPath()[0];
-    const index = Number(clickedEl.id);
+  function _handleClickTile(index: number) {
     if (_tileIsFull(index) || _getWInner(boardState)) {
       return;
     }
@@ -165,11 +158,28 @@ export const SoloGame: React.FC = () => {
         <div>
           <InputText name='Pj 2:' value={token2} action={(event: ChangeEvent) => _changeToken2(event)} length={1} />
         </div>
-        <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
+        <BoardStyled>
+          {_renderBoard(boardState)}
+        </BoardStyled>
         <Span value={timerText} />
         <Span value={movesCountText} />
         <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>
   );
+
+  function _renderBoard(boardState: string[]) {
+    return (
+      <React.Fragment>
+        {boardState.map((element, index) => (
+          <Tile
+            id={index.toString()}
+            value={element}
+            handleOnClick={() => _handleClickTile(index)}
+            key={index}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
 };

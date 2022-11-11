@@ -2,6 +2,10 @@ import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { OneVersusComputerGame } from './OneVersusComputerGame';
 
+function getTilesEls() {
+  return screen.getAllByRole('button').filter(e => e.textContent === '');
+}
+
 describe('<OneVersusComputerGame />', () => {
   beforeEach(() => {
     render(
@@ -9,9 +13,14 @@ describe('<OneVersusComputerGame />', () => {
     );
   });
 
+  it('renders same number of buttons as array prop length', () => {
+    const tileEls = getTilesEls();
+    expect(tileEls).toHaveLength(9);
+  });
+
   it('resets state when reset button is clicked', () => {
-    const buttonEls = screen.getAllByRole('button');
-    fireEvent.click(buttonEls[0]);
+    const tileEls = getTilesEls();
+    fireEvent.click(tileEls[0]);
     let tiles1Els = screen.getAllByText(/^x$/i);
     let tiles2Els = screen.getAllByText(/^o$/i);
     expect(tiles1Els).toHaveLength(1);
@@ -25,11 +34,11 @@ describe('<OneVersusComputerGame />', () => {
   });
 
   it('has an AI that plays against the player', () => {
-    const buttonEls = screen.getAllByRole('button');
-    fireEvent.click(buttonEls[0]);
-    for (let i = 1; i < buttonEls.length; i++) {
-      if (buttonEls[i].textContent === '') {
-        fireEvent.click(buttonEls[i]);
+    const tileEls = getTilesEls();
+    fireEvent.click(tileEls[0]);
+    for (let i = 1; i < tileEls.length; i++) {
+      if (tileEls[i].textContent === '') {
+        fireEvent.click(tileEls[i]);
         break;
       }
     }

@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Span } from '../../atoms';
-import { Board } from '../../molecules';
-import { SectionStyled } from './styled';
-
-interface ClickedElement extends EventTarget {
-  id?: string;
-}
+import { Button, Span, Tile } from '../../atoms';
+import { BoardStyled, SectionStyled } from './styled';
 
 export const OneVersusComputerGame: React.FC = () => {
   const initialBoardState = new Array(9).fill('');
@@ -84,9 +79,7 @@ export const OneVersusComputerGame: React.FC = () => {
     return newBoardState;
   }
 
-  function _handleClickTile(event: React.UIEvent<HTMLButtonElement | HTMLDivElement>) {
-    const clickedEl: ClickedElement = event.nativeEvent.composedPath()[0];
-    const index = Number(clickedEl.id);
+  function _handleClickTile(index: number) {
     if (_tileIsFull(index) || _hasWon(boardState)) {
       return;
     }
@@ -110,9 +103,26 @@ export const OneVersusComputerGame: React.FC = () => {
     <React.Fragment>
       <SectionStyled>
         <Span value={resultState} />
-        <Board tiles={boardState} handleClickTile={_handleClickTile}></Board>
+        <BoardStyled>
+          {_renderBoard(boardState)}
+        </BoardStyled>
         <Button value="Reset" handleOnClick={() => _handleResetButton()}></Button>
       </SectionStyled>
     </React.Fragment>
   );
+
+  function _renderBoard(boardState: string[]) {
+    return (
+      <React.Fragment>
+        {boardState.map((element, index) => (
+          <Tile
+            id={index.toString()}
+            value={element}
+            handleOnClick={() => _handleClickTile(index)}
+            key={index}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
 };
