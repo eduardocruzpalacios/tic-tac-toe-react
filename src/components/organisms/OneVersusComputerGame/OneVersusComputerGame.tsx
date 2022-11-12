@@ -90,6 +90,7 @@ export const OneVersusComputerGame: React.FC = () => {
       setBoardState(boardStateAfterPlayer);
     } else if (_isBoardFull(boardStateAfterPlayer)) {
       setResultState('It is a draw!');
+      setBoardState(boardStateAfterPlayer);
     } else {
       const boardStateAfterComputer = computerPlays(boardStateAfterPlayer);
       if (_hasWon(boardStateAfterComputer)) {
