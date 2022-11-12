@@ -4,7 +4,6 @@ import { TileStyled } from './styled';
 import { useGlobalTheme } from '../../../context/ThemeContext';
 
 export const Tile: React.FC<TileProps> = ({
-  id,
   value,
   handleOnClick
 }: TileProps) => {
@@ -12,7 +11,7 @@ export const Tile: React.FC<TileProps> = ({
 
   return (
     <React.Fragment>
-      <TileStyled id={id} onClick={handleOnClick} className={theme}>
+      <TileStyled onClick={() => handleOnClick()} className={theme}>
         {value && value}
       </TileStyled>
     </React.Fragment>
