@@ -90,6 +90,7 @@ export const OneVersusComputerGame: React.FC = () => {
       setBoardState(boardStateAfterPlayer);
     } else if (_isBoardFull(boardStateAfterPlayer)) {
       setResultState('It is a draw!');
+      setBoardState(boardStateAfterPlayer);
     } else {
       const boardStateAfterComputer = computerPlays(boardStateAfterPlayer);
       if (_hasWon(boardStateAfterComputer)) {
@@ -116,7 +117,6 @@ export const OneVersusComputerGame: React.FC = () => {
       <React.Fragment>
         {boardState.map((element, index) => (
           <Tile
-            id={index.toString()}
             value={element}
             handleOnClick={() => _handleClickTile(index)}
             key={index}
