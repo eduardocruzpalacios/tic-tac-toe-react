@@ -173,7 +173,6 @@ export const SoloGame: React.FC = () => {
       <React.Fragment>
         {boardState.map((element, index) => (
           <Tile
-            id={index.toString()}
             value={element}
             handleOnClick={() => _handleClickTile(index)}
             key={index}
