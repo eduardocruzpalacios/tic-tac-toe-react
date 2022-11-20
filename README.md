@@ -14,7 +14,7 @@ Tic tac toe built with React hooks, TypeScript, Node, CSS, Styled Components, Je
 - Reset game
 
 ## Architecture
-(Atomic design)](https://atomicdesign.bradfrost.com/chapter-2/).
+[Atomic design](https://atomicdesign.bradfrost.com/chapter-2/).
 
 ## Testing
 - Test runner: Jest
