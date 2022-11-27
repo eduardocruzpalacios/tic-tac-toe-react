@@ -1,62 +1,9 @@
 import React, { useState } from 'react';
+import { gameFactory } from '../../../reducer/gamesHistoricReducerFactory';
+import { GameResult } from '../../../reducer/gamesHistoricReducerType';
+import { gamesHistoricReducer } from '../../../reducer/gamesHistoricReducer';
 import { Button, Span, Tile } from '../../atoms';
 import { BoardStyled, SectionStyled } from './styled';
-
-// eslint-disable-next-line no-unused-vars
-enum GameResult {
-  // eslint-disable-next-line no-unused-vars
-  win= 'win', draw= 'draw', lost = 'lost'
-}
-
-interface Game {
-  result: GameResult,
-  date: Date,
-}
-
-interface GamesHistoric {
-  games: Array<Game>
-}
-
-interface Action {
-  type: string
-}
-
-Storage.prototype.setObject = function(key: string, object: unknown) {
-  return this.setItem(key, JSON.stringify(object));
-};
-
-Storage.prototype.getObject = function(key: string) {
-  const objectInJson = this.getItem(key) || '';
-  if (objectInJson === '') {
-    return;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const object = JSON.parse(objectInJson);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return object;
-};
-
-const localStorageKey = 'gamesHistoric';
-
-function gamesHistoricReducer(state: Game, action: Action): void {
-  switch (action.type) {
-    case 'add': {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-      let gamesHistoric: GamesHistoric = localStorage.getObject(localStorageKey);
-      if (!gamesHistoric) {
-        gamesHistoric = {
-          games: []
-        };
-      }
-      gamesHistoric.games.push(state);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      localStorage.setObject(localStorageKey, gamesHistoric);
-      break;
-    }
-    default:
-      throw new Error();
-  }
-}
 
 export const OneVersusComputerGame: React.FC = () => {
   const initialBoardState = new Array(9).fill('');
@@ -144,27 +91,18 @@ export const OneVersusComputerGame: React.FC = () => {
     if (_hasWon(boardStateAfterPlayer)) {
       setResultState('You won!');
       setBoardState(boardStateAfterPlayer);
-      const game: Game = {
-        result: GameResult.win,
-        date: new Date()
-      };
+      const game = gameFactory(GameResult.win);
       gamesHistoricReducer(game, { type: 'add' });
     } else if (_isBoardFull(boardStateAfterPlayer)) {
       setResultState('It is a draw!');
       setBoardState(boardStateAfterPlayer);
-      const game: Game = {
-        result: GameResult.draw,
-        date: new Date()
-      };
+      const game = gameFactory(GameResult.draw);
       gamesHistoricReducer(game, { type: 'add' });
     } else {
       const boardStateAfterComputer = computerPlays(boardStateAfterPlayer);
       if (_hasWon(boardStateAfterComputer)) {
         setResultState('You lost!');
-        const game: Game = {
-          result: GameResult.lost,
-          date: new Date()
-        };
+        const game = gameFactory(GameResult.lost);
         gamesHistoricReducer(game, { type: 'add' });
       }
       setBoardState(boardStateAfterComputer);
