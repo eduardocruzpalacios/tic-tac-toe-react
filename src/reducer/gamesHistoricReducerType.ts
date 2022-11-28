@@ -2,7 +2,7 @@ import { gamesHistoricReducer } from './gamesHistoricReducer';
 
 export enum GameResult {
   // eslint-disable-next-line no-unused-vars
-  win, draw, lost
+  win = 'win', draw = 'draw', lost = 'lost'
 }
 
 export interface Game {
@@ -10,7 +10,7 @@ export interface Game {
   date: Date;
 }
 
-export interface GamesHistoric {
+export interface GameRepository {
   games: Array<Game>;
 }
 
