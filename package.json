@@ -54,7 +54,7 @@
   "private": true,
   "scripts": {
     "build": "react-scripts build",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./build",
     "clean:coverage": "rimraf ./coverage",
     "lint": "eslint --ext ts,tsx src",
     "prebuild": "run-s clean",
