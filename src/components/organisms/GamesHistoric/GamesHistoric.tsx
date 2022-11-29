@@ -1,18 +1,9 @@
 import React from 'react';
-import {
-  Game,
-  GameResult,
-  GameRepository
-} from '../../../reducer/gamesHistoricReducerType';
+import { GameRepository } from '../../../reducer/gamesHistoricReducerType';
 import { gamesHistoricReducer } from '../../../reducer/gamesHistoricReducer';
 
 export const GamesHistoric: React.FC = () => {
-  const game: Game = {
-    result: GameResult.draw,
-    date: new Date()
-  };
-
-  const gamesHistoric: GameRepository = gamesHistoricReducer(game, {
+  const gamesHistoric: GameRepository = gamesHistoricReducer(undefined, {
     type: 'get'
   });
 

@@ -15,7 +15,7 @@ Storage.prototype.getObject = function(key: string) {
 
 const localStorageKey = 'gamesHistoric';
 
-export function gamesHistoricReducer(state: Game, action: Action): GameRepository {
+export function gamesHistoricReducer(state: Game | undefined, action: Action): GameRepository {
   switch (action.type) {
     case 'add': {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
@@ -25,7 +25,9 @@ export function gamesHistoricReducer(state: Game, action: Action): GameRepositor
           games: []
         };
       }
-      gamesHistoric.games.push(state);
+      if (state) {
+        gamesHistoric.games.push(state);
+      }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       localStorage.setObject(localStorageKey, gamesHistoric);
       return gamesHistoric;
