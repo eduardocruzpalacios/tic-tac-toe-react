@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { gameFactory } from '../../../reducer/gamesHistoricReducerFactory';
+import { GameResult } from '../../../reducer/gamesHistoricReducerType';
+import { gamesHistoricReducer } from '../../../reducer/gamesHistoricReducer';
 import { Button, Span, Tile } from '../../atoms';
 import { BoardStyled, SectionStyled } from './styled';
 
@@ -88,13 +91,19 @@ export const OneVersusComputerGame: React.FC = () => {
     if (_hasWon(boardStateAfterPlayer)) {
       setResultState('You won!');
       setBoardState(boardStateAfterPlayer);
+      const game = gameFactory(GameResult.win);
+      gamesHistoricReducer(game, { type: 'add' });
     } else if (_isBoardFull(boardStateAfterPlayer)) {
       setResultState('It is a draw!');
       setBoardState(boardStateAfterPlayer);
+      const game = gameFactory(GameResult.draw);
+      gamesHistoricReducer(game, { type: 'add' });
     } else {
       const boardStateAfterComputer = computerPlays(boardStateAfterPlayer);
       if (_hasWon(boardStateAfterComputer)) {
         setResultState('You lost!');
+        const game = gameFactory(GameResult.lost);
+        gamesHistoricReducer(game, { type: 'add' });
       }
       setBoardState(boardStateAfterComputer);
     }

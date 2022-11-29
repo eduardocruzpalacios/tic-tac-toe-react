@@ -16,6 +16,9 @@ export const Nav: React.FC = () => {
           <li>
             <Link to="/oneversuscomputer">1 vs Computer</Link>
           </li>
+          <li>
+            <Link to="/gameshistoric">Games Historic</Link>
+          </li>
         </ul>
       </NavStyled>
     </React.Fragment>
