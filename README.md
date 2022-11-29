@@ -4,6 +4,7 @@ Tic tac toe built with React hooks, TypeScript, Node, CSS, Styled Components, Je
 
 ## Functionality
 - Dark/light mode
+- Games historic
 ### Solo game mode
 - Reset game
 - Game time counter
